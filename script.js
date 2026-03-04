@@ -2,15 +2,19 @@
 let TextArea = document.getElementsByTagName('textarea')[0];
 let AddButton = document.getElementById('add');
 let UndoButton = document.getElementById('undo');
+//let RedoButton = document.getElementById('redo');
 
 //Arrays
 let historico = [''];
 let undo = [''];
+//let redo = [''];
+//let cut = [''];
 
 //Event Listeners
 TextArea.addEventListener('input', textArea);
 AddButton.addEventListener('click', addFunction);
 UndoButton.addEventListener('click', undoFunction);
+//RedoButton.addEventListener('click', redoFunction);
 
 //Functions
 function addFunction(){
@@ -40,6 +44,8 @@ function print(){
     console.log('------------');
     console.log('Undo:', undo);
     console.log('Histórico:', historico);
+    //console.log('Redo', redo);
+    //console.log('Cut', cut);
 }
 
 function textArea(){
