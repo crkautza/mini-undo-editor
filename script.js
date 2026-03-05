@@ -3,8 +3,11 @@ let TextArea = document.getElementsByTagName('textarea')[0];
 let AddButton = document.getElementById('add');
 let UndoButton = document.getElementById('undo');
 let RedoButton = document.getElementById('redo');
+let Input = document.getElementsByTagName('input')[0];
+let InsertButton = document.getElementById('insert');
 
 //Arrays
+let palavra = 'Palavra';
 let historico = [''];
 let undo = [''];
 let redo = [''];
@@ -16,11 +19,18 @@ TextArea.addEventListener('input', textArea);
 AddButton.addEventListener('click', addFunction);
 UndoButton.addEventListener('click', undoFunction);
 RedoButton.addEventListener('click', redoFunction);
+InsertButton.addEventListener('click', insertFunction);
 
 //Functions
 function addFunction(){
-    TextArea.value += 'Palavra';
+    TextArea.value += palavra;
     varPush();
+}
+
+function insertFunction() {
+    if(Input.value){
+    palavra = Input.value;
+    }
 }
 
 function undoFunction(){
