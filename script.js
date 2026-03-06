@@ -7,15 +7,11 @@ let Input = document.getElementsByTagName('input')[0];
 let InsertBtn = document.getElementById('insert');
 
 //Arrays
-let palavra = 'Palavra';
-let states = [''];
-let undo = [''];
-let redo = [''];
-let i = 0;
-//let cut = [''];
+let word = 'Palavra';
+let undoStack = [];
+let redoStack = [];
 
 //Event Listeners
-TextArea.addEventListener('input', textArea);
 AddBtn.addEventListener('click', addFunction);
 UndoBtn.addEventListener('click', undoFunction);
 RedoBtn.addEventListener('click', redoFunction);
@@ -23,65 +19,54 @@ InsertBtn.addEventListener('click', insertFunction);
 
 //Functions
 function addFunction(){
-    TextArea.value += palavra;
-    varPush();
+    undoStack.push(TextArea.value);
+    redoStack = [];
+    TextArea.value += word;
+    updateBtn();
 }
 
 function insertFunction() {
     if(Input.value){
-    palavra = Input.value;
+    word = Input.value;
     addFunction();
     }
 }
 
 function undoFunction(){
-    i++;
-    if(TextArea.value){
-    undo.pop();
-    print();
-    undo.forEach(elemento => {
-        TextArea.value = elemento;
-    });;
-    //states.push(TextArea.value);
+    if(undoStack.length > 0){
+    redoStack.push(TextArea.value);
+    const lastState = undoStack.pop();
+    TextArea.value = lastState;
     }
+    updateBtn();
 }
 
 function redoFunction() {
-    if(i > 0){
-        i--;
-        redo.splice(0, undo.length);
-        redo.forEach(elemento => {
-        TextArea.value = elemento;
-        });;
-        //states.push(TextArea.value);
-        undo.push(TextArea.value);
-        redo = [''];
-        states.forEach((elemento) => {
-            redo.push(elemento);
-        })
-        print();
+    if(redoStack.length > 0 ){
+        undoStack.push(TextArea.value);
+        const lastRedo = redoStack.pop();
+        TextArea.value = lastRedo;
     }
-}
-
-function varPush(){
-    states.push(TextArea.value);
-    undo.push(TextArea.value);
-    redo.push(TextArea.value);
+    updateBtn();
 }
 
 function print(){
     console.log('------------');
-    console.log('Undo:', undo);
-    console.log('Histórico:', states);
-    console.log('Redo', redo);
-    //console.log('Cut', cut);
+    console.log('Undo:', undoStack);
+    console.log('Redo', redoStack);
 }
 
-function textArea(){
-    if (states.length >= 20 && undo.length >= 20) {
-    states.splice(0, 17);
-    undo.splice(0, 17);
+function updateBtn() {
+    if(redoStack.length == 0){
+        RedoBtn.disabled = true;
+    }else{
+        RedoBtn.disabled = false;
     }
-    varPush();
-    print();
+    if(undoStack.length == 0){
+        UndoBtn.disabled = true;
+    }else{
+        UndoBtn.disabled = false;
+    }
 }
+
+updateBtn();
