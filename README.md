@@ -11,6 +11,7 @@ Um editor de texto minimalista com funcionalidade de **desfazer (undo)** e **ref
 - Atalhos de teclado: **Ctrl+Z** (desfazer) e **Ctrl+Y** (refazer)
 - Botões desabilitados dinamicamente quando não há ações disponíveis
 - Persistência com **localStorage** – o texto e o histórico são salvos mesmo após recarregar a página
+- Layout responsivo com suporte a dispositivos móveis
 
 ## Estrutura do projeto
 
@@ -18,6 +19,7 @@ Um editor de texto minimalista com funcionalidade de **desfazer (undo)** e **ref
 mini-undo-editor/
 ├── index.html         # Estrutura da página
 ├── script.js          # Lógica completa do editor
+├── style.css          # Estilização
 └── README.md          # Documentação
 └── LICENSE            # Licença
 ```
@@ -37,12 +39,24 @@ mini-undo-editor/
 ## Tecnologias utilizadas
 
 - HTML5
+- CSS3 (Flexbox, responsividade)
 - JavaScript (puro, sem frameworks)
 
-## Autor
+## Versões
+O projeto possui as seguintes branches:
 
-Caio Richard - [GitHub](https://github.com/crkautza)   - [Linkedin](https://www.linkedin.com/in/crkautza/)
+- main – versão estável atual
+
+- v1.0 – versão inicial com undo/redo básico
+
+- v1.1 – adicionado atalhos de teclado
+
+- v1.2 – implementado localStorage e responsividade
 
 ## Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## Autor
+
+Caio Richard - [GitHub](https://github.com/crkautza)   - [Linkedin](https://www.linkedin.com/in/crkautza/)
