@@ -14,6 +14,7 @@ let redoStack = [];
 //Event Listeners
 AddBtn.addEventListener('click', addFunction);
 UndoBtn.addEventListener('click', undoFunction);
+document.addEventListener('keydown', eventKey);
 RedoBtn.addEventListener('click', redoFunction);
 InsertBtn.addEventListener('click', insertFunction);
 
@@ -66,6 +67,17 @@ function updateBtn() {
         UndoBtn.disabled = true;
     }else{
         UndoBtn.disabled = false;
+    }
+}
+
+function eventKey(event){
+    if(event.ctrlKey && event.key == 'z' && undoStack.length > 0){
+    event.preventDefault();
+    undoFunction();
+    }
+    if(event.ctrlKey && event.key == 'y' && redoStack.length > 0){
+    event.preventDefault();
+    redoFunction();
     }
 }
 
