@@ -1,0 +1,32 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #101112;
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    color: white;
+    background-color: rgb(54, 54, 223);
+    cursor: pointer;
+}
+
+textarea{
+    width: 600px;
+    height: 150px;
+    color: white;
+    background-color: #101112;
+    display: flex;
+    border-radius: 1%;
+    margin-bottom: 20px;
+}
+
+input{
+    width: 250px;
+    color: white;
+    background-color: #101112;
+}
+
+.container{
+    background-color: #202224;
+}
