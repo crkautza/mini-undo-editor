@@ -11,6 +11,8 @@ let word = 'Palavra';
 let undoStack = [];
 let redoStack = [];
 
+getState();
+
 //Event Listeners
 AddBtn.addEventListener('click', addFunction);
 UndoBtn.addEventListener('click', undoFunction);
@@ -23,21 +25,24 @@ function addFunction(){
     undoStack.push(TextArea.value);
     redoStack = [];
     TextArea.value += word;
+    setState();
     updateBtn();
 }
 
 function insertFunction() {
     if(Input.value){
-    word = Input.value;
-    addFunction();
+        word = Input.value;
+        addFunction();
+        setState();
     }
 }
 
 function undoFunction(){
     if(undoStack.length > 0){
-    redoStack.push(TextArea.value);
-    const lastState = undoStack.pop();
-    TextArea.value = lastState;
+        redoStack.push(TextArea.value);
+        const lastState = undoStack.pop();
+        TextArea.value = lastState;
+        setState();
     }
     updateBtn();
 }
@@ -47,6 +52,7 @@ function redoFunction() {
         undoStack.push(TextArea.value);
         const lastRedo = redoStack.pop();
         TextArea.value = lastRedo;
+        setState();
     }
     updateBtn();
 }
@@ -72,13 +78,31 @@ function updateBtn() {
 
 function eventKey(event){
     if(event.ctrlKey && event.key == 'z' && undoStack.length > 0){
-    event.preventDefault();
-    undoFunction();
+        event.preventDefault();
+        undoFunction();
     }
     if(event.ctrlKey && event.key == 'y' && redoStack.length > 0){
-    event.preventDefault();
-    redoFunction();
+        event.preventDefault();
+        redoFunction();
     }
+}
+
+function setState() {
+    localStorage.setItem('word', word);
+    localStorage.setItem('undoStack', JSON.stringify(undoStack));
+    localStorage.setItem('redoStack', JSON.stringify(redoStack));
+    localStorage.setItem('text', JSON.stringify(TextArea.value));
+}
+
+function getState() {
+    let getWord = localStorage.getItem('word');
+    let getUndoStack = localStorage.getItem('undoStack');
+    let getRedoStack = localStorage.getItem('redoStack');
+    let getText = localStorage.getItem('text');
+    if(getWord){word = getWord}
+    if(getUndoStack){undoStack = JSON.parse(getUndoStack)}
+    if(getRedoStack){redoStack = JSON.parse(getRedoStack)}
+    if(getText){TextArea.value = JSON.parse(getText)}
 }
 
 updateBtn();
