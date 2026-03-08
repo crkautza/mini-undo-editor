@@ -6,7 +6,7 @@ let RedoBtn = document.getElementById('redo');
 let Input = document.getElementsByTagName('input')[0];
 let InsertBtn = document.getElementById('insert');
 
-//Arrays
+//Vars & Arrays
 let word = 'Palavra';
 let undoStack = [];
 let redoStack = [];
